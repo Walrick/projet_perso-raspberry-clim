@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf8 -*-
 
-import core.controller as controller
+import core.maincontroller as main_controller
 
 
 class Main:
     def __init__(self):
-        self.controller = controller
+        self.controller = main_controller.MainController()
 
     def launch(self):
         self.controller.main_loop()

@@ -12,10 +12,29 @@ class Gpio:
         self.legal_pins = [2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                            17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
 
+        # Init des pin's
+        for pin in self.legal_pins:
+            if not os.path.isfile("/sys/class/gpio/gpio%i/direction" % pin):
+                path = "/sys/class/gpio/export"
+                content = str(pin)
+                with open(path, 'w') as file:
+                    file.write(content)
+
+        # init les pin's du module relais_1 en sortie
+        for pin in constant.relais_1.keys():
+            path = "/sys/class/gpio/gpio%i/direction" % pin
+            content = "out"
+            with open(path, 'w') as file:
+                file.write(content)
+            path = "/sys/class/gpio/gpio%i/value" % pin
+            content = "1"
+            with open(path, 'w') as file:
+                file.write(content)
+
         # init des capteurs wire 1
         directory = os.listdir("/sys/bus/w1/devices")
-        sensor = len(directory) - 1
-        print("nombre de capteur sur le Wire 1 : " + str(sensor))
+        sensor_nbr = len(directory) - 1
+        print("nombre de capteur sur le Wire 1 : " + str(sensor_nbr))
 
         self.thermometer = []
         for file in directory:
@@ -23,8 +42,7 @@ class Gpio:
                 location = ""
                 path = "/sys/bus/w1/devices/" + file + "/w1_slave"
                 with open(path, 'r') as files:
-                    s = files.read()
-                data = s[0]
+                    data = files.read()
                 prep = data.split(" ")
                 temp = int(prep[20][2:]) / 1000
 
@@ -73,7 +91,7 @@ class Gpio:
 
         if pin in self.legal_pins:
             if mode in ("in", "out"):
-                path = "/sys/class/gpio/gpio%i/value" % pin
+                path = "/sys/class/gpio/gpio%i/direction" % pin
                 with open(path, 'w') as file:
                     file.write(mode)
             else:
@@ -92,8 +110,7 @@ class Thermometer:
     def get_value(self):
         path = "/sys/bus/w1/devices/" + self.code + "/w1_slave"
         with open(path, 'r') as files:
-            s = files.read()
-        data = s[0]
+            data = files.read()
         prep = data.split(" ")
         self.value = int(prep[20][2:]) / 1000
         return self.value
