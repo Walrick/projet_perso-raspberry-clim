@@ -1,6 +1,6 @@
 # Projet perso
 
-## Mise en oeuvre d'une raspberry py pour piloter une clim
+## Mise en oeuvre d'un raspberry py pour piloter une clim
 
 Ce projet m'a permis de piloter une clim portative grace a un raspberry py et quelques sondes de temperatures.
 J'ai également pu aborder la mise en place du threading et multiprocessoring (même si pour ce projet ce n'était pas nécessaire)
