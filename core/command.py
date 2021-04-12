@@ -13,7 +13,6 @@ class Console(threading.Thread):
         self.running = True
         print("console - Init terminée")
 
-
     def run(self):
 
         while self.running:
@@ -32,7 +31,6 @@ class Console(threading.Thread):
                     command[2] == "SALON" and command[3].isdigit():
                 self.command.append("SET TEMP SALON " + command[3])
                 print("request set temp salon "+ command[3])
-
 
             print("vérif - Console - run")
 

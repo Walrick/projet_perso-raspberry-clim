@@ -32,9 +32,18 @@ class ClimSalon(threading.Thread):
 
         print(time.asctime())
         print("température salon calculé : " + str(self.temp_salon))
-        print("Salon : " + str(self.component.temp_salon) + ", entrée_air : " + str(self.component.temp_entree_air))
-        print("Température fluide : " + str(self.component.temp_fluide_interne) + ", Véranda : " + str(
-            self.component.temp_veranda))
+        print(
+            "Salon : "
+            + str(self.component.temp_salon)
+            + ", entrée_air : "
+            + str(self.component.temp_entree_air)
+        )
+        print(
+            "Température fluide : "
+            + str(self.component.temp_fluide_interne)
+            + ", Véranda : "
+            + str(self.component.temp_veranda)
+        )
         print("température alim : " + str(self.component.temp_alim))
         print("Etat component :")
         print("Ventilateur principal : " + self.component.fan_prin)
@@ -56,7 +65,9 @@ class ClimSalon(threading.Thread):
 
             else:
 
-                self.temp_salon = (self.component.temp_entree_air + self.component.temp_salon) / 2
+                self.temp_salon = (
+                    self.component.temp_entree_air + self.component.temp_salon
+                ) / 2
                 if self.temp_target > self.temp_salon:
                     # il faut plus froid que la cible
                     self.delta = self.temp_target - self.temp_salon
@@ -94,12 +105,20 @@ class ClimSalon(threading.Thread):
                         self.component.inverseur("FROID")
                         self.component.fan_secondaire("GRANDE")
 
-
             print(time.asctime())
             print("température salon calculé : " + str(self.temp_salon))
-            print("Salon : " + str(self.component.temp_salon) + ", entrée_air : " + str(self.component.temp_entree_air))
-            print("Température fluide : " + str(self.component.temp_fluide_interne) + ", Véranda : " + str(
-                self.component.temp_veranda))
+            print(
+                "Salon : "
+                + str(self.component.temp_salon)
+                + ", entrée_air : "
+                + str(self.component.temp_entree_air)
+            )
+            print(
+                "Température fluide : "
+                + str(self.component.temp_fluide_interne)
+                + ", Véranda : "
+                + str(self.component.temp_veranda)
+            )
             print("température alim : " + str(self.component.temp_alim))
             print("Etat component :")
             print("Ventilateur principal : " + self.component.fan_prin)

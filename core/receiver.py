@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3.9
 # -*- coding: utf8 -*-
 
 import threading
@@ -17,9 +17,10 @@ class Receiver(threading.Thread):
     def run(self):
         while self.running:
 
-            self.data.append(self.conn_pipe.recv())
+            data = self.conn_pipe.recv()
+            self.data.append(data)
             print("Réception de donnée sur le thread " + self.name)
-            print(self.data)
+            print(self.data, data)
 
     def stop(self):
         self.running = False

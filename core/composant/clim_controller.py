@@ -38,7 +38,9 @@ class ClimControl(multiprocessing.Process):
 
         # Init clim_chamber - new thread
         print(self.name + "- lance l'init du thread de la clim_chamber")
-        self.clim_chamber = clim_chamber.ClimChamber(self.gpio, self.TEMP_SETPOINT_CHAMBER)
+        self.clim_chamber = clim_chamber.ClimChamber(
+            self.gpio, self.TEMP_SETPOINT_CHAMBER
+        )
         print(self.name + "- init du thread de la clim_chamber complet")
 
         self.receiver_clim.start()
@@ -63,15 +65,24 @@ class ClimControl(multiprocessing.Process):
                         self.clim_chamber.stop()
                         self.running = False
                         self.conn_pipe.send("QUIT Process")
-                        print("clim receiver is alive : " + str(self.receiver_clim.is_alive()))
-                        print("clim_salon is alive : " + str(self.clim_salon.is_alive()))
-                        print("clim_chamber is alive : " + str(self.clim_chamber.is_alive()))
-                        if not self.receiver_clim.is_alive() and\
-                                not self.clim_salon.is_alive() and\
-                                not self.clim_chamber.is_alive():
+                        print(
+                            "clim receiver is alive : "
+                            + str(self.receiver_clim.is_alive())
+                        )
+                        print(
+                            "clim_salon is alive : " + str(self.clim_salon.is_alive())
+                        )
+                        print(
+                            "clim_chamber is alive : "
+                            + str(self.clim_chamber.is_alive())
+                        )
+                        if (
+                            not self.receiver_clim.is_alive()
+                            and not self.clim_salon.is_alive()
+                            and not self.clim_chamber.is_alive()
+                        ):
                             loop = False
                         time.sleep(1)
-
 
                 if send == "PAUSE ALL":
                     self.clim_salon.pause = True
@@ -83,16 +94,14 @@ class ClimControl(multiprocessing.Process):
                     self.clim_chamber.pause = False
                     print("reprise")
 
-                if command[0] == "SET" and command[1] == "TEMP" and command[2] == "SALON":
+                if (
+                    command[0] == "SET"
+                    and command[1] == "TEMP"
+                    and command[2] == "SALON"
+                ):
                     temp = int(command[3])
                     self.clim_salon.get_temp_target(temp)
-                    print("set temp salon "+ command[3] + " terminée")
-
-
+                    print("set temp salon " + command[3] + " terminée")
 
             time.sleep(10)
             print("vérif - " + self.name + " - run")
-
-
-
-

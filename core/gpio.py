@@ -51,7 +51,7 @@ class Gpio:
                         location = i
 
                 if location == "":
-                    location = "non defini"
+                    location = "non défini"
                     self.thermometer.append(Thermometer(location, file, temp))
                 else:
                     self.thermometer.append(Thermometer(location, file, temp))
@@ -69,7 +69,7 @@ class Gpio:
                 raise ValueError(
                     "Etat du pin {} non valide, état : {}".format(pin, state))
         else:
-            raise ValueError("Pin selectionné non valide : %i" % pin)
+            raise ValueError("Pin sélectionné non valide : %i" % pin)
 
     def read(self, pin):
 
@@ -85,7 +85,7 @@ class Gpio:
                 raise ValueError(
                     "Etat du pin {} non valide, état : {}".format(pin, state))
         else:
-            raise ValueError("Pin selectionné non valide : %i" % pin)
+            raise ValueError("Pin sélectionné non valide : %i" % pin)
 
     def mode(self, pin, mode):
 
@@ -98,7 +98,7 @@ class Gpio:
                 raise ValueError(
                     "Mode du pin {} non valide, mode : {}".format(pin, mode))
         else:
-            raise ValueError("Pin selectionné non valide : %i" % pin)
+            raise ValueError("Pin sélectionné non valide : %i" % pin)
 
 
 class Thermometer:

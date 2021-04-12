@@ -44,7 +44,7 @@ class MainController:
         # Init attribute
         self.running = True
 
-        # d'apres la fonction, 4 coeurs sur le raspberry
+        # d'après la fonction, 4 coeur sur le raspberry
         proc = multiprocessing.cpu_count()
         print("Processeurs : " + str(proc))
         print("init terminée")
